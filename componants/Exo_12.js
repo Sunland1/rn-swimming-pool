@@ -19,7 +19,15 @@ const Exo_12 = () => {
         }
     }
 
-    
+
+    const storeData = async (value) => {
+        try {
+          const jsonValue = JSON.stringify(value)
+          await AsyncStorage.setItem('markers', jsonValue)
+        } catch (e) {
+          // saving error
+        }
+    }
 
     const [defaultMap , setDefaultMap] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
@@ -35,19 +43,19 @@ const Exo_12 = () => {
             }
         })()
         let location = await Location.getCurrentPositionAsync({});
+        let initMarkers = await getData()
         setDefaultMap({
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
         });
+        setMarkers(initMarkers)
     },[])
 
     function insertMarker(coordinate){
-        markers.push({
-            latlng: coordinate
-        })
-        setMarkers(markers)
+        setMarkers([...markers,{latlng: coordinate}])
+        storeData([...markers,{latlng: coordinate}])
     }
 
 

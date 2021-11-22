@@ -33,10 +33,7 @@ const Exo_11 = () => {
     } , [])
 
     function inserMarker(coordinate){
-        markers.push({
-            latlng: coordinate
-        })
-        setMarkers(markers)
+        setMarkers([...markers , {latlng: coordinate}])
     }
 
 

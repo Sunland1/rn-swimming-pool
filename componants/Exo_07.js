@@ -14,7 +14,7 @@ const FirstScreen = ({navigation}) => {
 }
 
 
-const SecondScreen = () => {
+const SecondScreen = ({navigation}) => {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <TouchableOpacity onPress={() => navigation.navigate('First')} >
